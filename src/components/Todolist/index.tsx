@@ -3,14 +3,14 @@ import * as Styles from "./styles";
 import {
   FaRegTrashAlt,
   FaEdit,
-  FaPlusSquare,
   FaCheckCircle,
   FaMinusCircle,
 } from "react-icons/fa";
+import { IoIosArrowDropdown } from "react-icons/io";
 import { useTask } from "../../context/TaskContext";
 
 const Todolist: React.FC = () => {
-  const { getTasks, tasks, deleteTask } = useTask();
+  const { getTasks, filteredNames, tasks, search, deleteTask } = useTask();
 
   useEffect(() => {
     getTasks();
@@ -25,33 +25,58 @@ const Todolist: React.FC = () => {
           <Styles.HeaderDate>Date</Styles.HeaderDate>
           <Styles.HeaderStatus>Status</Styles.HeaderStatus>
           <Styles.ButtonHeader>
-            <FaPlusSquare />
+            <IoIosArrowDropdown color="var(--text)" />
           </Styles.ButtonHeader>
         </Styles.TodoListHeader>
-        {tasks.map((item) => {
-          return (
-            <Styles.TodoList key={item.id}>
-              <Styles.Name>{item.name}</Styles.Name>
-              <Styles.Description>{item.description}</Styles.Description>
-              <Styles.CreatedAt>
-                {new Intl.DateTimeFormat("pt-BR").format(
-                  new Date(item.created_at)
-                )}
-              </Styles.CreatedAt>
-              <Styles.Status>
-                {item.status ? (
-                  <FaCheckCircle color="green" title="Done" />
-                ) : (
-                  <FaMinusCircle color="red" title="In progress" />
-                )}
-              </Styles.Status>
-              <Styles.ButtonsWrapper>
-                <FaEdit />
-                <FaRegTrashAlt onClick={() => deleteTask(item.id)} />
-              </Styles.ButtonsWrapper>
-            </Styles.TodoList>
-          );
-        })}
+        {search.length > 0
+          ? filteredNames.map((item) => {
+              return (
+                <Styles.TodoList key={item.id}>
+                  <Styles.Name>{item.name}</Styles.Name>
+                  <Styles.Description>{item.description}</Styles.Description>
+                  <Styles.CreatedAt>
+                    {new Intl.DateTimeFormat("pt-BR").format(
+                      new Date(item.created_at)
+                    )}
+                  </Styles.CreatedAt>
+                  <Styles.Status>
+                    {item.status ? (
+                      <FaCheckCircle color="green" title="Done" />
+                    ) : (
+                      <FaMinusCircle color="red" title="In progress" />
+                    )}
+                  </Styles.Status>
+                  <Styles.ButtonsWrapper>
+                    <FaEdit />
+                    <FaRegTrashAlt onClick={() => deleteTask(item.id)} />
+                  </Styles.ButtonsWrapper>
+                </Styles.TodoList>
+              );
+            })
+          : tasks.map((item) => {
+              return (
+                <Styles.TodoList key={item.id}>
+                  <Styles.Name>{item.name}</Styles.Name>
+                  <Styles.Description>{item.description}</Styles.Description>
+                  <Styles.CreatedAt>
+                    {new Intl.DateTimeFormat("pt-BR").format(
+                      new Date(item.created_at)
+                    )}
+                  </Styles.CreatedAt>
+                  <Styles.Status>
+                    {item.status ? (
+                      <FaCheckCircle color="green" title="Done" />
+                    ) : (
+                      <FaMinusCircle color="red" title="In progress" />
+                    )}
+                  </Styles.Status>
+                  <Styles.ButtonsWrapper>
+                    <FaEdit />
+                    <FaRegTrashAlt onClick={() => deleteTask(item.id)} />
+                  </Styles.ButtonsWrapper>
+                </Styles.TodoList>
+              );
+            })}
       </Styles.TodolistContainer>
     </Styles.TodolistWrapper>
   );

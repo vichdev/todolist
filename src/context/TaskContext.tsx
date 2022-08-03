@@ -7,8 +7,9 @@ const TaskContext = createContext<ITaskContext>({} as ITaskContext);
 
 const Context: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const [tasks, setTasks] = useState<Array<ITasks>>([]);
+  const [search, setSearch] = useState<string>("");
 
-  async function getTasks() {
+  async function getTasks(): Promise<void> {
     await api
       .get("tasks")
       .then((response) => {
@@ -18,13 +19,22 @@ const Context: React.FC<{ children: React.ReactNode }> = ({ children }) => {
       .catch((e) => alert(e));
   }
 
-  const deleteTask = async (id: string) => {
+  const filteredNames =
+    search.length > 0
+      ? tasks.filter((item) =>
+          item.name.toLowerCase().includes(search.toLowerCase())
+        )
+      : [];
+
+  const deleteTask = async (id: string): Promise<void> => {
     await api.delete(`/tasks/${id}`).then(async () => {
       await getTasks();
     });
   };
   return (
-    <TaskContext.Provider value={{ tasks, deleteTask, getTasks }}>
+    <TaskContext.Provider
+      value={{ tasks, deleteTask, getTasks, search, setSearch, filteredNames }}
+    >
       {children}
     </TaskContext.Provider>
   );

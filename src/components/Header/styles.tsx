@@ -7,13 +7,12 @@ const SearchAnimation = keyframes`
 
 export const HeaderWrapper = styled.div`
   width: 100%;
-  background-color: #fff;
-  height: 6rem;
+  background-color: var(--header);
+  height: 13rem;
   box-shadow: 0px 0px 30px 1px #cecece;
+  color: white;
 `;
-export const HeaderTitle = styled.h1`
-  color: var(--text);
-`;
+export const HeaderTitle = styled.h1``;
 
 export const NavbarSearch = styled.input`
   width: 12rem;
@@ -40,12 +39,11 @@ export const Header = styled.header`
   width: 100%;
   max-width: 80%;
   margin: 0 auto;
-  background-color: #fff;
   height: 100%;
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   justify-content: space-between;
-  padding: 1rem;
+  padding-top: 2rem;
 `;
 
 export const NavbarButton = styled.button`
@@ -53,10 +51,9 @@ export const NavbarButton = styled.button`
   height: 3rem;
   border-radius: 99rem;
   border: none;
-  background: #000;
   text-align: center;
+  background: transparent;
   &:hover {
-    background-color: white;
     ${NavbarSearch} {
       display: flex;
     }

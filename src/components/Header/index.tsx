@@ -1,15 +1,24 @@
 import React from "react";
 import * as Styles from "./styles";
 import { FaSearch } from "react-icons/fa";
+import { useTask } from "../../context/TaskContext";
 
 const Header: React.FC = () => {
+  const { search, setSearch } = useTask();
   return (
     <Styles.HeaderWrapper>
       <Styles.Header>
         <Styles.HeaderTitle>Lista de tarefas</Styles.HeaderTitle>
         <Styles.NavbarSearchWrapper>
           <Styles.NavbarButton>
-            <Styles.NavbarSearch placeholder="Pesquise pelo nome" />
+            <Styles.NavbarSearch
+              placeholder="Pesquise pelo nome"
+              type={"search"}
+              value={search}
+              onChange={(e) => {
+                setSearch(e.target.value);
+              }}
+            />
             <FaSearch />
           </Styles.NavbarButton>
         </Styles.NavbarSearchWrapper>
