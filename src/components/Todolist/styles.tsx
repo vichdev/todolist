@@ -51,7 +51,7 @@ export const TodoList = styled.tr`
     width: 100%;
   }
   &:hover {
-    filter: opacity(0.8);
+    opacity: 0.8;
   }
 `;
 

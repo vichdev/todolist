@@ -1,4 +1,5 @@
 import React, { createContext, useContext, useState } from "react";
+import Modal from "../components/Modal";
 import { ITaskContext } from "../models/ITaskContext";
 import { ITasks } from "../models/ITasks";
 import api from "../services/api";
@@ -11,6 +12,7 @@ const Context: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const [toast, setToast] = useState<ITaskContext["toast"]>({
     display: false,
   });
+  const [openModal, setOpenModal] = useState<boolean>(false);
 
   async function getTasks(): Promise<void> {
     await api
@@ -18,7 +20,13 @@ const Context: React.FC<{ children: React.ReactNode }> = ({ children }) => {
       .then((response) => {
         setTasks(response.data);
       })
-      .catch((e) => alert(e));
+      .catch((e) => {
+        displayToast({
+          title: "Request failed",
+          description: "Could not access tasks.",
+          status: false,
+        });
+      });
   }
 
   const filteredNames =
@@ -82,6 +90,8 @@ const Context: React.FC<{ children: React.ReactNode }> = ({ children }) => {
         filteredNames,
         toast,
         setToast,
+        openModal,
+        setOpenModal,
       }}
     >
       {children}

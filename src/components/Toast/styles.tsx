@@ -8,7 +8,7 @@ to {right: 2.5rem; top: 2.5rem}
 export const ToastWrapper = styled.div<{ setOpen?: boolean }>`
   display: ${(props) => (props.setOpen ? "flex" : "none")};
   width: 20rem;
-  height: 5rem;
+  height: 6rem;
   flex-direction: column;
   padding: 1rem;
   background-color: white;
@@ -34,8 +34,8 @@ export const ToastHeader = styled.div<{ isSucess?: boolean }>`
 `;
 export const ToastSpan = styled.span`
   margin-top: 0.5rem;
-  font-size: 0.8rem;
-  font-weight: 300;
+  font-size: 1rem;
+  font-weight: 400;
 `;
 export const ToastTitle = styled.h1`
   font-size: 1.5rem;

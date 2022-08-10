@@ -10,6 +10,8 @@ export interface ITaskContext {
   filteredNames: Array<ITasks>;
   toast: IToast;
   setToast: Dispatch<SetStateAction<IToast>>;
+  openModal: boolean;
+  setOpenModal: Dispatch<SetStateAction<boolean>>;
 }
 
 interface IToast {

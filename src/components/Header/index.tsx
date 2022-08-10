@@ -3,9 +3,10 @@ import * as Styles from "./styles";
 import { FaSearch } from "react-icons/fa";
 import { useTask } from "../../context/TaskContext";
 import Button from "../Button";
+import Modal from "../Modal";
 
 const Header: React.FC = () => {
-  const { search, setSearch } = useTask();
+  const { search, setSearch, setOpenModal } = useTask();
   return (
     <Styles.HeaderWrapper>
       <Styles.Header>
@@ -22,9 +23,19 @@ const Header: React.FC = () => {
             />
             <FaSearch />
           </Styles.NavbarButton>
-          <Button title="Adicionar" color="white" bgColor="black" />
+          <Button
+            title="New task"
+            color="white"
+            bgColor="var(--primary-lighter)"
+            onClick={() => {
+              setOpenModal(true);
+            }}
+          />
         </Styles.NavbarSearchWrapper>
       </Styles.Header>
+      <Modal headerTitle="Add new tasks">
+        <div></div>
+      </Modal>
     </Styles.HeaderWrapper>
   );
 };
