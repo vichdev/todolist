@@ -2,6 +2,7 @@ import React from "react";
 import * as Styles from "./styles";
 import { FaSearch } from "react-icons/fa";
 import { useTask } from "../../context/TaskContext";
+import Button from "../Button";
 
 const Header: React.FC = () => {
   const { search, setSearch } = useTask();
@@ -21,6 +22,7 @@ const Header: React.FC = () => {
             />
             <FaSearch />
           </Styles.NavbarButton>
+          <Button title="Adicionar" color="white" bgColor="black" />
         </Styles.NavbarSearchWrapper>
       </Styles.Header>
     </Styles.HeaderWrapper>

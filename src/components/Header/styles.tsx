@@ -7,7 +7,7 @@ const SearchAnimation = keyframes`
 
 export const HeaderWrapper = styled.div`
   width: 100%;
-  background-color: var(--header);
+  background-color: var(--primary);
   height: 13rem;
   box-shadow: 0px 0px 30px 1px #cecece;
   color: white;
@@ -32,7 +32,7 @@ export const NavbarSearchWrapper = styled.div`
   max-width: 15rem;
   display: flex;
   align-items: flex-start;
-  justify-content: center;
+  justify-content: space-between;
 `;
 
 export const Header = styled.header`

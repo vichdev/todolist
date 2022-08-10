@@ -1,4 +1,9 @@
-import styled from "styled-components";
+import styled, { keyframes } from "styled-components";
+
+const toggleList = keyframes`
+from {display: none; opacity: 0;}
+to {display: flex; opacity: 1}
+`;
 
 export const TodolistWrapper = styled.div`
   width: 100%;
@@ -24,6 +29,17 @@ export const TodolistContainer = styled.table`
   }
 `;
 
+export const ListAll = styled.div<{ setOpen: boolean }>`
+  display: ${(props) => (props.setOpen ? "flex" : "none")};
+  width: 100%;
+  height: 100%;
+  flex-direction: column;
+  animation-name: ${toggleList};
+  animation-duration: 0.5s;
+  animation-fill-mode: forwards;
+  transition: 0.5s ease ${toggleList};
+`;
+
 export const TodoList = styled.tr`
   width: 100%;
   display: flex;
@@ -33,6 +49,9 @@ export const TodoList = styled.tr`
   td {
     text-align: left;
     width: 100%;
+  }
+  &:hover {
+    filter: opacity(0.8);
   }
 `;
 
@@ -86,6 +105,9 @@ export const CreatedAt = styled.td`
 export const Status = styled.td`
   max-width: 10rem;
   display: flex;
+  svg {
+    cursor: default;
+  }
   justify-content: center;
 `;
 
