@@ -30,7 +30,8 @@ export const SummaryHeader = styled.div<{ iconColor: string }>`
   align-items: center;
   svg {
     color: ${(props) => props.iconColor};
-    font-size: 1.5rem;
+    font-size: 2rem;
+    cursor: default;
   }
 `;
 

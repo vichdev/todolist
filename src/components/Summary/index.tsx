@@ -42,7 +42,7 @@ const Summary: React.FC = () => {
     {
       title: "In Progress",
       textColor: "white",
-      bgColor: "var(--green)",
+      bgColor: "var(--red)",
       icon: <BiTaskX />,
       iconColor: "white",
       state: inProgress,
@@ -50,7 +50,7 @@ const Summary: React.FC = () => {
     {
       title: "Done",
       textColor: "white",
-      bgColor: "var(--red)",
+      bgColor: "var(--green)",
       icon: <BiTask />,
       iconColor: "white",
       state: done,
