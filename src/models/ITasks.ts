@@ -3,5 +3,6 @@ export interface ITasks {
   description: string;
   status: boolean;
   id: string;
+  priority: number;
   created_at: Date;
 }

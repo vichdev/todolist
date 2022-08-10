@@ -10,6 +10,8 @@ export const GlobalStyles = createGlobalStyle`
   --text: #333333;
   --white: #FFFFFF;
   --primary-lighter: #5f30e0;
+  --gray-border: #d8d6de;
+  --gray-text: #a1a7bb;
 }
 
 * {

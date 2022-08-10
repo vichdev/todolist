@@ -5,10 +5,15 @@ export const ButtonWrapper = styled.div`
   height: 3rem;
 `;
 
-export const Button = styled.button<{ bgColor: string; color: string }>`
+export const Button = styled.button<{
+  bgColor: string;
+  color: string;
+  borderColor?: string;
+}>`
   width: 100%;
   height: 100%;
-  border: 1px solid black;
+  border: 1px solid
+    ${(props) => (props.borderColor ? props.borderColor : "white")};
   background-color: ${(props) =>
     props.bgColor ? props.bgColor : "var(--primary"};
   color: ${(props) => (props.color ? props.color : "var(--white)")};

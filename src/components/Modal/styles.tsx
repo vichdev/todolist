@@ -16,14 +16,10 @@ export const ModalHeader = styled.header`
   width: 100%;
   height: 3rem;
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
   color: var(--text);
   background-color: #f8f8f8;
-  padding: 2rem;
-  svg {
-    font-size: 1.5rem;
-  }
 `;
 
 export const HeaderTitle = styled.h1`
@@ -36,12 +32,21 @@ export const ModalContainer = styled.div<{
 }>`
   width: ${(props) => (props.widthSize ? props.widthSize : "35%")};
   max-width: 31.25rem;
+  position: relative;
   height: ${(props) => (props.heightSize ? props.heightSize : "50%")};
   max-height: 31.25rem;
   background-color: white;
+  svg {
+    font-size: 1.5rem;
+    position: absolute;
+    color: black;
+    top: 0.75rem;
+    right: 1rem;
+  }
 `;
 
 export const Modal = styled.div`
   width: 100%;
-  height: 100%;
+  height: 90%;
+  padding: 1rem;
 `;

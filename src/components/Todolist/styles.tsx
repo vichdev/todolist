@@ -29,7 +29,12 @@ export const TodolistContainer = styled.table`
   }
 `;
 
-export const ListAll = styled.div<{ setOpen: boolean }>`
+export const TableHeader = styled.thead`
+  width: 100%;
+  display: flex;
+`;
+
+export const ListAll = styled.tbody<{ setOpen: boolean }>`
   display: ${(props) => (props.setOpen ? "flex" : "none")};
   width: 100%;
   height: 100%;

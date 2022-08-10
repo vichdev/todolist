@@ -1,5 +1,4 @@
 import React, { createContext, useContext, useState } from "react";
-import Modal from "../components/Modal";
 import { ITaskContext } from "../models/ITaskContext";
 import { ITasks } from "../models/ITasks";
 import api from "../services/api";

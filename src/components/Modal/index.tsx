@@ -16,9 +16,9 @@ const Modal: React.FC<IPropsModal> = ({
       <Styles.ModalContainer widthSize={widthSize} heightSize={heightSize}>
         <Styles.ModalHeader>
           <Styles.HeaderTitle>{headerTitle}</Styles.HeaderTitle>
-          <IoClose onClick={() => setOpenModal(false)} />
         </Styles.ModalHeader>
         <Styles.Modal>{children}</Styles.Modal>
+        <IoClose onClick={() => setOpenModal(false)} />
       </Styles.ModalContainer>
     </Styles.ModalWrapper>
   );
