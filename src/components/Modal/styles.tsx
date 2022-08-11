@@ -19,6 +19,7 @@ export const ModalHeader = styled.header`
   justify-content: center;
   align-items: center;
   color: var(--text);
+  border-radius: 0.75rem;
   background-color: #f8f8f8;
 `;
 
@@ -36,6 +37,7 @@ export const ModalContainer = styled.div<{
   height: ${(props) => (props.heightSize ? props.heightSize : "50%")};
   max-height: 31.25rem;
   background-color: white;
+  border-radius: 0.75rem;
   svg {
     font-size: 1.5rem;
     position: absolute;
