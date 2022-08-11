@@ -20,6 +20,7 @@ export const Button = styled.button<{
   &:hover {
     opacity: 0.8;
   }
+  filter: ${(props) => (props.disabled ? "brightness(0.5)" : "")};
   font-size: 1rem;
   border-radius: 0.5rem;
 `;

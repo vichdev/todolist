@@ -81,7 +81,9 @@ const Todolist: React.FC = () => {
                         <FaMinusCircle color="red" title="In progress" />
                       )}
                     </Styles.Status>
-                    <Styles.Status>{item.priority}</Styles.Status>
+                    <Styles.Priority title={priorityFlags[item.priority].title}>
+                      {priorityFlags[item.priority].flag}
+                    </Styles.Priority>
                     <Styles.ButtonsWrapper>
                       <FaEdit />
                       <FaRegTrashAlt onClick={() => deleteTask(item.id)} />
@@ -106,9 +108,9 @@ const Todolist: React.FC = () => {
                         <FaMinusCircle color="red" title="In progress" />
                       )}
                     </Styles.Status>
-                    <Styles.Status title={priorityFlags[1].title}>
+                    <Styles.Priority title={priorityFlags[item.priority].title}>
                       {priorityFlags[item.priority].flag}
-                    </Styles.Status>
+                    </Styles.Priority>
                     <Styles.ButtonsWrapper>
                       <FaEdit />
                       <FaRegTrashAlt onClick={() => deleteTask(item.id)} />

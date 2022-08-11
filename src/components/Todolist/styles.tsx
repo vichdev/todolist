@@ -7,7 +7,7 @@ to {display: flex; opacity: 1}
 
 export const TodolistWrapper = styled.div`
   width: 100%;
-  height: 90vh;
+  height: 70vh;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -17,7 +17,8 @@ export const TodolistContainer = styled.table`
   width: 100%;
   max-width: 80%;
   height: 100%;
-  max-height: 90%;
+  max-height: 80%;
+  overflow-y: auto;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -26,6 +27,18 @@ export const TodolistContainer = styled.table`
   width: 100%;
   tr:nth-child(even) {
     background-color: #dddddd;
+  }
+  ::-webkit-scrollbar {
+    width: 20px;
+  }
+
+  ::-webkit-scrollbar-track {
+    box-shadow: inset 0 0 5px grey;
+    border-radius: 0.25rem;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: var(--gray-border);
   }
 `;
 
@@ -108,6 +121,14 @@ export const CreatedAt = styled.td`
 `;
 
 export const Status = styled.td`
+  max-width: 10rem;
+  display: flex;
+  svg {
+    cursor: default;
+  }
+  justify-content: center;
+`;
+export const Priority = styled.td`
   max-width: 10rem;
   display: flex;
   svg {

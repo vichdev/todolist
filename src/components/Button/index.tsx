@@ -8,6 +8,7 @@ const Button: React.FC<IButtonProps> = ({
   color,
   bgColor,
   borderColor,
+  disabled,
 }) => {
   return (
     <Styles.ButtonWrapper>
@@ -16,6 +17,7 @@ const Button: React.FC<IButtonProps> = ({
         bgColor={bgColor}
         color={color}
         borderColor={borderColor}
+        disabled={disabled}
       >
         {title}
       </Styles.Button>

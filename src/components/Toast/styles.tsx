@@ -18,6 +18,7 @@ export const ToastWrapper = styled.div<{ setOpen?: boolean }>`
   top: 2.5rem;
   right: 2.5rem;
   border-radius: 0.5rem;
+  z-index: 9999;
   animation-name: ${fadeIn};
   animation-duration: 0.5s;
   animation-fill-mode: forwards;

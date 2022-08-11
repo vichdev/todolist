@@ -5,13 +5,40 @@ import api from "../services/api";
 
 const TaskContext = createContext<ITaskContext>({} as ITaskContext);
 
+interface ICreateTask {
+  name: string;
+  description: string;
+  priority: number;
+  status: boolean;
+}
+
 const Context: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const [tasks, setTasks] = useState<Array<ITasks>>([]);
   const [search, setSearch] = useState<string>("");
   const [toast, setToast] = useState<ITaskContext["toast"]>({
     display: false,
   });
-  const [openModal, setOpenModal] = useState<boolean>(false);
+  const [openCreateModal, setOpenCreateModal] = useState<boolean>(false);
+
+  async function createTask(task: ICreateTask): Promise<void> {
+    await api
+      .post("tasks", task)
+      .then(() => {
+        displayToast({
+          title: "Request successful",
+          description: "Your task(s) has been successfully created.",
+          status: true,
+        });
+        getTasks();
+      })
+      .catch((e) => {
+        displayToast({
+          title: "Request failed",
+          description: "Could not create a new task.",
+          status: false,
+        });
+      });
+  }
 
   async function getTasks(): Promise<void> {
     await api
@@ -47,7 +74,6 @@ const Context: React.FC<{ children: React.ReactNode }> = ({ children }) => {
         });
       })
       .catch((e) => {
-        console.log(e.message);
         displayToast({
           title: "Request failed",
           description: e.message,
@@ -89,8 +115,9 @@ const Context: React.FC<{ children: React.ReactNode }> = ({ children }) => {
         filteredNames,
         toast,
         setToast,
-        openModal,
-        setOpenModal,
+        openCreateModal,
+        setOpenCreateModal,
+        createTask,
       }}
     >
       {children}
