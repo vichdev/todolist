@@ -3,6 +3,7 @@ import * as Styles from "./styles";
 import { BiTask, BiTaskX } from "react-icons/bi";
 import { BsListTask } from "react-icons/bs";
 import { useTask } from "../../context/TaskContext";
+import { Status } from "../../utils/Enums/EnumPriority";
 
 const Summary: React.FC = () => {
   const [total, setTotal] = useState<number>(0);
@@ -15,12 +16,14 @@ const Summary: React.FC = () => {
   };
 
   const inProgressFilter = () => {
-    const inProgressTasks = tasks.filter((item) => item.status === false);
+    const inProgressTasks = tasks.filter(
+      (item) => item.status === Status.inProgress
+    );
     setInProgress(inProgressTasks.length);
   };
 
   const doneFilter = () => {
-    const doneTasks = tasks.filter((item) => item.status === true);
+    const doneTasks = tasks.filter((item) => item.status === Status.Done);
     setDone(doneTasks.length);
   };
 

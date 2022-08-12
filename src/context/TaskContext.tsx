@@ -40,9 +40,17 @@ const Context: React.FC<{ children: React.ReactNode }> = ({ children }) => {
       });
   }
 
-  async function getTasks(): Promise<void> {
+  async function getTasks(
+    priority?: number | string,
+    status?: number | string
+  ): Promise<void> {
     await api
-      .get("tasks")
+      .get("tasks", {
+        params: {
+          priority: priority,
+          status: status,
+        },
+      })
       .then((response) => {
         setTasks(response.data);
       })

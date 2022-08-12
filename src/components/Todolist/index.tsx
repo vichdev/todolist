@@ -10,8 +10,8 @@ import {
 import { IoIosArrowDropdown, IoIosArrowDropup } from "react-icons/io";
 import { useTask } from "../../context/TaskContext";
 
-interface IPriority {
-  [key: number]: { title: string; flag: JSX.Element };
+interface IObjectLiteralIcons {
+  [key: number]: { title: string; icon: JSX.Element };
 }
 
 const Todolist: React.FC = () => {
@@ -22,18 +22,29 @@ const Todolist: React.FC = () => {
     getTasks();
   }, []);
 
-  const priorityFlags: IPriority = {
+  const priorityFlags: IObjectLiteralIcons = {
     0: {
       title: "Urgent",
-      flag: <FaFlag color="var(--red)" />,
+      icon: <FaFlag color="var(--red)" />,
     },
     1: {
       title: "High",
-      flag: <FaFlag color="#ffcc00" />,
+      icon: <FaFlag color="#ffcc00" />,
     },
     2: {
       title: "Normal",
-      flag: <FaFlag color="#6fddff" />,
+      icon: <FaFlag color="#6fddff" />,
+    },
+  };
+
+  const statusIcons: IObjectLiteralIcons = {
+    0: {
+      title: "In Progress",
+      icon: <FaMinusCircle color="red" title="In progress" />,
+    },
+    1: {
+      title: "Done",
+      icon: <FaCheckCircle color="green" title="Done" />,
     },
   };
 
@@ -74,15 +85,11 @@ const Todolist: React.FC = () => {
                         new Date(item.created_at)
                       )}
                     </Styles.CreatedAt>
-                    <Styles.Status>
-                      {item.status ? (
-                        <FaCheckCircle color="green" title="Done" />
-                      ) : (
-                        <FaMinusCircle color="red" title="In progress" />
-                      )}
+                    <Styles.Status title={statusIcons[item.status].title}>
+                      {statusIcons[item.status].icon}
                     </Styles.Status>
                     <Styles.Priority title={priorityFlags[item.priority].title}>
-                      {priorityFlags[item.priority].flag}
+                      {priorityFlags[item.priority].icon}
                     </Styles.Priority>
                     <Styles.ButtonsWrapper>
                       <FaEdit />
@@ -101,15 +108,11 @@ const Todolist: React.FC = () => {
                         new Date(item.created_at)
                       )}
                     </Styles.CreatedAt>
-                    <Styles.Status>
-                      {item.status ? (
-                        <FaCheckCircle color="green" title="Done" />
-                      ) : (
-                        <FaMinusCircle color="red" title="In progress" />
-                      )}
+                    <Styles.Status title={statusIcons[item.status].title}>
+                      {statusIcons[item.status].icon}
                     </Styles.Status>
                     <Styles.Priority title={priorityFlags[item.priority].title}>
-                      {priorityFlags[item.priority].flag}
+                      {priorityFlags[item.priority].icon}
                     </Styles.Priority>
                     <Styles.ButtonsWrapper>
                       <FaEdit />

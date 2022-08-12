@@ -2,7 +2,10 @@ import { Dispatch, SetStateAction } from "react";
 import { ITasks } from "./ITasks";
 
 export interface ITaskContext {
-  getTasks: () => void;
+  getTasks: (
+    priority?: number | string,
+    status?: number | string
+  ) => Promise<void>;
   tasks: Array<ITasks>;
   deleteTask: (id: string) => void;
   search: string;

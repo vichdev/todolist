@@ -12,6 +12,9 @@ export const GlobalStyles = createGlobalStyle`
   --primary-lighter: #5f30e0;
   --gray-border: #d8d6de;
   --gray-text: #a1a7bb;
+  --blue-flag: #6fddff;
+  --red-flag: #e52e4d;
+  --yellow-flag: #ffcc00;
 }
 
 * {
