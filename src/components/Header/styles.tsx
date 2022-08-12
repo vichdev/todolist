@@ -1,4 +1,5 @@
 import styled, { keyframes } from "styled-components";
+import { Button } from "../Button/styles";
 
 const SearchAnimation = keyframes`
 0%{width: 0rem}
@@ -66,4 +67,9 @@ export const NavbarButton = styled.button`
     font-size: 1rem;
     color: white;
   }
+`;
+
+export const FilterButton = styled(Button)`
+  width: 3rem;
+  height: 3rem;
 `;
