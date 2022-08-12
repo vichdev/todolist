@@ -38,6 +38,15 @@ export const ModalContainer = styled.div<{
   max-height: 31.25rem;
   background-color: white;
   border-radius: 0.75rem;
+`;
+
+export const Modal = styled.div`
+  width: 100%;
+  height: 90%;
+  padding: 1rem;
+`;
+
+export const CloseWrapper = styled.div`
   svg {
     font-size: 1.5rem;
     position: absolute;
@@ -45,10 +54,4 @@ export const ModalContainer = styled.div<{
     top: 0.75rem;
     right: 1rem;
   }
-`;
-
-export const Modal = styled.div`
-  width: 100%;
-  height: 90%;
-  padding: 1rem;
 `;

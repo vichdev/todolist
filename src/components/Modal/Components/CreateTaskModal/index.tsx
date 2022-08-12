@@ -1,23 +1,24 @@
 import React, { useState } from "react";
 import * as Styles from "./styles";
-import { FormControlLabel, FormGroup, Switch } from "@mui/material";
 import { FaTrashAlt } from "react-icons/fa";
 import { useTask } from "../../../../context/TaskContext";
 import Button from "../../../Button";
+import { Status, Priority } from "../../../../utils/Enums/EnumPriority";
+import SelectInputs from "../../../Select";
 
 const CreateTaskModal: React.FC = () => {
-  const [status, setSwitchStatus] = useState<boolean>(false);
+  const [status, setStatus] = useState<number>(Status.inProgress);
   const [taskListed, setTaskListed] = useState<
     Array<{
       name: string;
       description: string;
       priority: number;
-      status: boolean;
+      status: number;
     }>
   >([]);
   const [name, setName] = useState<string>("");
   const [description, setDescription] = useState<string>("");
-  const [priority, setPriority] = useState<number>(2);
+  const [priority, setPriority] = useState<number>(Priority.Normal);
   const { createTask, setOpenCreateModal, openCreateModal } = useTask();
 
   function addMore(): void {
@@ -28,21 +29,6 @@ const CreateTaskModal: React.FC = () => {
   const errorMessage =
     taskListed.length >= 3 ? "You can only add 3 tasks at once." : "";
 
-  const options = [
-    {
-      text: "Urgent",
-      value: 0,
-    },
-    {
-      text: "High",
-      value: 1,
-    },
-    {
-      text: "Normal",
-      value: 2,
-    },
-  ];
-
   const deleteTaskListed = (index: number) => {
     taskListed.splice(index, 1);
     setTaskListed([...taskListed]);
@@ -51,7 +37,7 @@ const CreateTaskModal: React.FC = () => {
   function cleanInputs(): void {
     setName("");
     setDescription("");
-    setSwitchStatus(false);
+    setStatus(Status.inProgress);
   }
 
   function addTasks(): void {
@@ -87,34 +73,16 @@ const CreateTaskModal: React.FC = () => {
           />
         </Styles.AddTaskInputsWrapper>
         <Styles.SwitchWrapper>
-          <Styles.PriorityButtonWrapper>
-            <Styles.PrioritySelect name="flag">
-              {options.map((option) => {
-                return (
-                  <option
-                    value={option.value}
-                    onClick={() => {
-                      setPriority(option.value);
-                    }}
-                  >
-                    {option.text}
-                  </option>
-                );
-              })}
-            </Styles.PrioritySelect>
-          </Styles.PriorityButtonWrapper>
-          <FormGroup>
-            <FormControlLabel
-              control={
-                <Switch
-                  value={status}
-                  onChange={() => setSwitchStatus(!status)}
-                />
-              }
-              labelPlacement="start"
-              label={status ? "Done" : "In Progress"}
-            />
-          </FormGroup>
+          <SelectInputs
+            state={priority}
+            stateController={setPriority}
+            typePriority
+          />
+          <SelectInputs
+            state={status}
+            stateController={setStatus}
+            typePriority={false}
+          />
         </Styles.SwitchWrapper>
       </Styles.FormContainer>
       <Styles.TasksListWrapper>

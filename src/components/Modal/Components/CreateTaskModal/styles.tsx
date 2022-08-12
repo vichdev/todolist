@@ -35,8 +35,9 @@ export const AddTaskInputsWrapper = styled.div`
 export const SwitchWrapper = styled.div`
   width: 100%;
   display: flex;
-  align-items: flex-end;
-  justify-content: flex-end;
+  align-items: center;
+  justify-content: center;
+  gap: 5rem;
 `;
 
 export const ButtonWrapper = styled.div`
@@ -46,7 +47,7 @@ export const ButtonWrapper = styled.div`
 `;
 
 export const FormContainer = styled.div`
-  display: FLEX;
+  display: flex;
   flex-direction: column;
   justify-content: space-between;
   gap: 0.5rem;
@@ -79,18 +80,4 @@ export const TaskAddedTitle = styled.span``;
 export const ErrorWrapper = styled.div`
   text-align: center;
   color: var(--red);
-`;
-
-export const PriorityButtonWrapper = styled.div`
-  height: 100%;
-`;
-
-export const PrioritySelect = styled.select`
-  height: 100%;
-  width: 4.5rem;
-  border: 1px solid black;
-  color: white;
-  background-color: var(--text);
-  font-size: 0.8rem;
-  color: ${(props) => props.color};
 `;

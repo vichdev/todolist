@@ -18,11 +18,13 @@ const Modal: React.FC<IPropsModal> = ({
           <Styles.HeaderTitle>{headerTitle}</Styles.HeaderTitle>
         </Styles.ModalHeader>
         <Styles.Modal>{children}</Styles.Modal>
-        <IoClose
-          onClick={() => {
-            toggle(!isOpen);
-          }}
-        />
+        <Styles.CloseWrapper>
+          <IoClose
+            onClick={() => {
+              toggle(!isOpen);
+            }}
+          />
+        </Styles.CloseWrapper>
       </Styles.ModalContainer>
     </Styles.ModalWrapper>
   );

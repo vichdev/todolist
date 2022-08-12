@@ -53,6 +53,13 @@ const Context: React.FC<{ children: React.ReactNode }> = ({ children }) => {
       })
       .then((response) => {
         setTasks(response.data);
+        if (priority || status) {
+          displayToast({
+            title: "Request successful",
+            description: "Tasks successfully obtained.",
+            status: true,
+          });
+        }
       })
       .catch((e) => {
         displayToast({
