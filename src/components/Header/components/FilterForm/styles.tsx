@@ -13,6 +13,7 @@ export const FilterWrapper = styled.div<{ isOpen: boolean }>`
   right: 8.5rem;
   padding: 1rem;
   flex-direction: column;
+  z-index: 999rem;
   justify-content: space-between;
 `;
 

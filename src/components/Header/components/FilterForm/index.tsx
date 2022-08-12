@@ -20,11 +20,13 @@ const FilterForm: React.FC<IPropsFilter> = ({ isOpen }) => {
         state={priority}
         stateController={setPriority}
         typePriority
+        isNotCreatingTask
       />
       <SelectInputs
         state={status}
         stateController={setStatus}
         typePriority={false}
+        isNotCreatingTask
       />
       <Styles.FilterButton
         bgColor="var(--green)"

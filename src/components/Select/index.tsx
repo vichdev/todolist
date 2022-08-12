@@ -9,6 +9,7 @@ const SelectInputs: React.FC<IPropsSelect> = ({
   typePriority,
   state,
   stateController,
+  isNotCreatingTask,
 }) => {
   return (
     <>
@@ -42,13 +43,17 @@ const SelectInputs: React.FC<IPropsSelect> = ({
               />
               Normal
             </MenuItem>
-            <MenuItem value={""}>
-              <FaFlag
-                color="var(--gray-border)"
-                style={{ marginRight: "1rem" }}
-              />
-              None
-            </MenuItem>
+            {isNotCreatingTask ? (
+              <MenuItem value={""}>
+                <FaFlag
+                  color="var(--gray-border)"
+                  style={{ marginRight: "1rem" }}
+                />
+                None
+              </MenuItem>
+            ) : (
+              ""
+            )}
           </Select>
         </FormControl>
       ) : (
@@ -79,14 +84,17 @@ const SelectInputs: React.FC<IPropsSelect> = ({
               />
               Done
             </MenuItem>
-            <MenuItem value={""}>
-              <BsFilterCircleFill
-                color="var(--gray-border)"
-                title="None"
-                style={{ marginRight: "1rem" }}
-              />
-              None
-            </MenuItem>
+            {isNotCreatingTask ? (
+              <MenuItem value={""}>
+                <BsFilterCircleFill
+                  color="var(--gray-border)"
+                  style={{ marginRight: "1rem" }}
+                />
+                None
+              </MenuItem>
+            ) : (
+              ""
+            )}
           </Select>
         </FormControl>
       )}
