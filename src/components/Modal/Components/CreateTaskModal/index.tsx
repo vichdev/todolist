@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import * as Styles from "./styles";
 import { FaTrashAlt } from "react-icons/fa";
 import { useTask } from "../../../../context/TaskContext";
@@ -7,7 +7,7 @@ import { Status, Priority } from "../../../../utils/Enums/EnumPriority";
 import SelectInputs from "../../../Select";
 
 const CreateTaskModal: React.FC = () => {
-  const [status, setStatus] = useState<number>(Status.inProgress);
+  const { createTask, setOpenCreateModal, openCreateModal } = useTask();
   const [taskListed, setTaskListed] = useState<
     Array<{
       name: string;
@@ -16,10 +16,10 @@ const CreateTaskModal: React.FC = () => {
       status: number;
     }>
   >([]);
+  const [status, setStatus] = useState<number>(Status.inProgress);
   const [name, setName] = useState<string>("");
   const [description, setDescription] = useState<string>("");
   const [priority, setPriority] = useState<number>(Priority.Normal);
-  const { createTask, setOpenCreateModal, openCreateModal } = useTask();
 
   function addMore(): void {
     setTaskListed([...taskListed, { name, description, status, priority }]);

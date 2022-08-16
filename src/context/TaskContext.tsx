@@ -1,16 +1,9 @@
 import React, { createContext, useContext, useState } from "react";
-import { ITaskContext } from "../models/ITaskContext";
+import { ICreateTask, ITaskContext } from "../models/ITaskContext";
 import { ITasks } from "../models/ITasks";
 import api from "../services/api";
 
 const TaskContext = createContext<ITaskContext>({} as ITaskContext);
-
-interface ICreateTask {
-  name: string;
-  description: string;
-  priority: number;
-  status: boolean;
-}
 
 const Context: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const [tasks, setTasks] = useState<Array<ITasks>>([]);
@@ -18,6 +11,7 @@ const Context: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const [toast, setToast] = useState<ITaskContext["toast"]>({
     display: false,
   });
+  const [editTask, setEditTask] = useState<ITasks>({} as ITasks);
   const [openCreateModal, setOpenCreateModal] = useState<boolean>(false);
 
   async function createTask(task: ICreateTask): Promise<void> {
@@ -53,13 +47,6 @@ const Context: React.FC<{ children: React.ReactNode }> = ({ children }) => {
       })
       .then((response) => {
         setTasks(response.data);
-        if (priority || status) {
-          displayToast({
-            title: "Request successful",
-            description: "Tasks successfully obtained.",
-            status: true,
-          });
-        }
       })
       .catch((e) => {
         displayToast({
@@ -96,6 +83,15 @@ const Context: React.FC<{ children: React.ReactNode }> = ({ children }) => {
         });
       });
   };
+  //VERIFICAR E RETIRAR MOCK.
+  async function updateTask(id: string): Promise<void> {
+    await api.put(`tasks/${id}`, {
+      name: "css",
+      description: "funcionou",
+      priority: 2,
+      status: 1,
+    });
+  }
 
   function displayToast({
     title,
@@ -133,6 +129,9 @@ const Context: React.FC<{ children: React.ReactNode }> = ({ children }) => {
         openCreateModal,
         setOpenCreateModal,
         createTask,
+        editTask,
+        setEditTask,
+        updateTask,
       }}
     >
       {children}

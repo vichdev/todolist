@@ -15,7 +15,10 @@ export interface ITaskContext {
   setToast: Dispatch<SetStateAction<IToast>>;
   openCreateModal: boolean;
   setOpenCreateModal: Dispatch<SetStateAction<boolean>>;
-  createTask: (task: any) => void;
+  editTask: ITasks;
+  setEditTask: Dispatch<SetStateAction<ITasks>>;
+  createTask: (task: ICreateTask) => void;
+  updateTask: (id: string) => void;
 }
 
 interface IToast {
@@ -23,4 +26,11 @@ interface IToast {
   description?: string;
   status?: boolean;
   display?: boolean;
+}
+
+export interface ICreateTask {
+  name: string;
+  description: string;
+  priority: number;
+  status: number;
 }
