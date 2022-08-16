@@ -33,11 +33,9 @@ export const ModalContainer = styled.div<{
 }>`
   width: ${(props) => (props.widthSize ? props.widthSize : "35%")};
   max-width: 40rem;
-  min-height: 31.25rem;
   position: relative;
-  height: ${(props) => (props.heightSize ? props.heightSize : "50%")};
+  height: ${(props) => (props.heightSize ? props.heightSize : "80%")};
   max-height: 50rem;
-  min-height: 31.25rem;
   background-color: white;
   border-radius: 0.75rem;
 `;

@@ -1,5 +1,5 @@
 import React, { createContext, useContext, useState } from "react";
-import { ICreateTask, ITaskContext } from "../models/ITaskContext";
+import { ICreateTask, ITaskContext, IUpdateTask } from "../models/ITaskContext";
 import { ITasks } from "../models/ITasks";
 import api from "../services/api";
 
@@ -13,6 +13,8 @@ const Context: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   });
   const [editTask, setEditTask] = useState<ITasks>({} as ITasks);
   const [openCreateModal, setOpenCreateModal] = useState<boolean>(false);
+  const [displayEditTaskModal, setDisplayEditTaskModal] =
+    useState<boolean>(false);
 
   async function createTask(task: ICreateTask): Promise<void> {
     await api
@@ -84,13 +86,38 @@ const Context: React.FC<{ children: React.ReactNode }> = ({ children }) => {
       });
   };
   //VERIFICAR E RETIRAR MOCK.
-  async function updateTask(id: string): Promise<void> {
-    await api.put(`tasks/${id}`, {
-      name: "css",
-      description: "funcionou",
-      priority: 2,
-      status: 1,
-    });
+  async function updateTask(id: string, item: IUpdateTask): Promise<void> {
+    const { name, description, priority, status } = item;
+    await api
+      .put(`tasks/${id}`, {
+        name: name,
+        description: description,
+        priority: priority,
+        status: status,
+      })
+      .then(() => {
+        getTasks();
+        displayToast({
+          title: "Request successful",
+          description: "Your task has been successfully edited.",
+          status: true,
+        });
+      })
+      .catch((e) => {
+        if (!name || !description) {
+          displayToast({
+            title: "Request failed",
+            description: "Name or description can't be empty.",
+            status: false,
+          });
+        } else {
+          displayToast({
+            title: "Request failed",
+            description: "Unable to edit this task.",
+            status: false,
+          });
+        }
+      });
   }
 
   function displayToast({
@@ -132,6 +159,8 @@ const Context: React.FC<{ children: React.ReactNode }> = ({ children }) => {
         editTask,
         setEditTask,
         updateTask,
+        displayEditTaskModal,
+        setDisplayEditTaskModal,
       }}
     >
       {children}

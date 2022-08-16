@@ -18,7 +18,9 @@ export interface ITaskContext {
   editTask: ITasks;
   setEditTask: Dispatch<SetStateAction<ITasks>>;
   createTask: (task: ICreateTask) => void;
-  updateTask: (id: string) => void;
+  updateTask: (id: string, item: IUpdateTask) => void;
+  displayEditTaskModal: boolean;
+  setDisplayEditTaskModal: Dispatch<SetStateAction<boolean>>;
 }
 
 interface IToast {
@@ -29,6 +31,13 @@ interface IToast {
 }
 
 export interface ICreateTask {
+  name: string;
+  description: string;
+  priority: number;
+  status: number;
+}
+
+export interface IUpdateTask {
   name: string;
   description: string;
   priority: number;

@@ -142,3 +142,20 @@ export const ButtonsWrapper = styled.td`
   display: flex;
   justify-content: space-between;
 `;
+
+export const DeleteModalButtonWrapper = styled.div`
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+`;
+
+export const DeleteModalTitle = styled.span`
+  text-align: center;
+`;
+
+export const DeleteModalWrapper = styled.div`
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+`;

@@ -12,6 +12,7 @@ import { useTask } from "../../context/TaskContext";
 import Modal from "../Modal";
 import EditTaskModal from "../Modal/Components/EditTaskModal";
 import { ITasks } from "../../models/ITasks";
+import Button from "../Button";
 
 interface IObjectLiteralIcons {
   [key: number]: { title: string; icon: JSX.Element };
@@ -26,21 +27,20 @@ const Todolist: React.FC = () => {
     deleteTask,
     setEditTask,
     editTask,
-    updateTask,
+    setDisplayEditTaskModal,
+    displayEditTaskModal,
   } = useTask();
   const [displayTasks, setDisplayTasks] = useState<boolean>(true);
-  const [displayEditTask, setDisplayEditTask] = useState<boolean>(false);
+  const [displayDeleteModal, setDisplayDeleteModal] = useState<boolean>(false);
+  const [taskId, setTaskId] = useState<string>("");
 
   useEffect(() => {
     getTasks();
   }, []);
 
-  function handleEditTask(id: string, item: ITasks) {
+  function handleEditTask(item: ITasks): void {
     setEditTask(item);
-    console.log(item);
-    console.log(id);
-    setDisplayEditTask(true);
-    updateTask(id);
+    setDisplayEditTaskModal(!displayEditTaskModal);
   }
 
   const priorityFlags: IObjectLiteralIcons = {
@@ -115,10 +115,15 @@ const Todolist: React.FC = () => {
                     <Styles.ButtonsWrapper>
                       <FaEdit
                         onClick={() => {
-                          handleEditTask(item.id, item);
+                          handleEditTask(item);
                         }}
                       />
-                      <FaRegTrashAlt onClick={() => deleteTask(item.id)} />
+                      <FaRegTrashAlt
+                        onClick={() => {
+                          setDisplayDeleteModal(!displayDeleteModal);
+                          setTaskId(item.id);
+                        }}
+                      />
                     </Styles.ButtonsWrapper>
                   </Styles.TodoList>
                 );
@@ -142,10 +147,15 @@ const Todolist: React.FC = () => {
                     <Styles.ButtonsWrapper>
                       <FaEdit
                         onClick={() => {
-                          handleEditTask(item.id, item);
+                          handleEditTask(item);
                         }}
                       />
-                      <FaRegTrashAlt onClick={() => deleteTask(item.id)} />
+                      <FaRegTrashAlt
+                        onClick={() => {
+                          setDisplayDeleteModal(!displayDeleteModal);
+                          setTaskId(item.id);
+                        }}
+                      />
                     </Styles.ButtonsWrapper>
                   </Styles.TodoList>
                 );
@@ -154,10 +164,39 @@ const Todolist: React.FC = () => {
       </Styles.TodolistContainer>
       <Modal
         headerTitle="Edit task"
-        isOpen={displayEditTask}
-        toggle={setDisplayEditTask}
+        isOpen={displayEditTaskModal}
+        toggle={setDisplayEditTaskModal}
       >
         <EditTaskModal task={editTask} />
+      </Modal>
+      <Modal
+        headerTitle="Delete Task"
+        isOpen={displayDeleteModal}
+        toggle={setDisplayDeleteModal}
+        heightSize="10rem"
+      >
+        <Styles.DeleteModalWrapper>
+          <Styles.DeleteModalTitle>
+            Are you sure that you want to delete this task?
+          </Styles.DeleteModalTitle>
+          <Styles.DeleteModalButtonWrapper>
+            <Button
+              bgColor="var(--red)"
+              title="No"
+              color="white"
+              onClick={() => setDisplayDeleteModal(!displayDeleteModal)}
+            />
+            <Button
+              bgColor="var(--green)"
+              title="Yes"
+              color="white"
+              onClick={() => {
+                deleteTask(taskId);
+                setDisplayDeleteModal(!displayDeleteModal);
+              }}
+            />
+          </Styles.DeleteModalButtonWrapper>
+        </Styles.DeleteModalWrapper>
       </Modal>
     </Styles.TodolistWrapper>
   );

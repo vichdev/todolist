@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useTask } from "../../../../context/TaskContext";
+import { IUpdateTask } from "../../../../models/ITaskContext";
 import { ITasks } from "../../../../models/ITasks";
 import SelectInputs from "../../../Select";
 import { IPropsEditTask } from "./interfaces/IPropsEditTask";
@@ -8,11 +9,10 @@ import * as Styles from "./styles";
 
 const EditTaskModal: React.FC<IPropsEditTask> = ({ task }) => {
   const {
-    createTask,
-    setOpenCreateModal,
-    openCreateModal,
-    tasks,
-    setEditTask,
+    editTask,
+    updateTask,
+    setDisplayEditTaskModal,
+    displayEditTaskModal,
   } = useTask();
   const [editName, setEditName] = useState<string>(task.name);
   const [editDescription, setEditDescription] = useState<string>(
@@ -21,9 +21,17 @@ const EditTaskModal: React.FC<IPropsEditTask> = ({ task }) => {
   const [editPriority, setEditPriority] = useState<number>(0);
   const [editStatus, setEditStatus] = useState<number>(0);
 
-  useEffect(() => {
-    console.log(task.description);
-  }, []);
+  function handleUpdateTask(): void {
+    const taskEdited = {
+      name: editName,
+      description: editDescription,
+      priority: editPriority,
+      status: editStatus,
+    };
+    updateTask(editTask.id, taskEdited);
+    console.log(editName.length);
+    setDisplayEditTaskModal(!displayEditTaskModal);
+  }
 
   return (
     <Styles.AddTaskForm>
@@ -64,7 +72,7 @@ const EditTaskModal: React.FC<IPropsEditTask> = ({ task }) => {
           color="white"
           borderColor="black"
           onClick={() => {
-            setOpenCreateModal(!openCreateModal);
+            handleUpdateTask();
           }}
         >
           Edit task
