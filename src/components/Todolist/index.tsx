@@ -13,6 +13,7 @@ import Modal from "../Modal";
 import EditTaskModal from "../Modal/Components/EditTaskModal";
 import { ITasks } from "../../models/ITasks";
 import Button from "../Button";
+import NoData from "../NoData";
 
 interface IObjectLiteralIcons {
   [key: number]: { title: string; icon: JSX.Element };
@@ -70,135 +71,149 @@ const Todolist: React.FC = () => {
   };
 
   return (
-    <Styles.TodolistWrapper>
-      <Styles.TodolistContainer>
-        <Styles.TableHeader>
-          <Styles.TodoListHeader>
-            <Styles.HeaderName>Name</Styles.HeaderName>
-            <Styles.HeaderDescription>Description</Styles.HeaderDescription>
-            <Styles.HeaderDate>Date</Styles.HeaderDate>
-            <Styles.HeaderStatus>Status</Styles.HeaderStatus>
-            <Styles.HeaderStatus>Priority</Styles.HeaderStatus>
-            <Styles.ButtonHeader>
-              {displayTasks ? (
-                <IoIosArrowDropup
-                  color="var(--text)"
-                  onClick={() => setDisplayTasks(!displayTasks)}
+    <>
+      {tasks.length ? (
+        <Styles.TodolistWrapper>
+          <Styles.TodolistContainer>
+            <Styles.TableHeader>
+              <Styles.TodoListHeader>
+                <Styles.HeaderName>Name</Styles.HeaderName>
+                <Styles.HeaderDescription>Description</Styles.HeaderDescription>
+                <Styles.HeaderDate>Date</Styles.HeaderDate>
+                <Styles.HeaderStatus>Status</Styles.HeaderStatus>
+                <Styles.HeaderStatus>Priority</Styles.HeaderStatus>
+                <Styles.ButtonHeader>
+                  {displayTasks ? (
+                    <IoIosArrowDropup
+                      color="var(--text)"
+                      onClick={() => setDisplayTasks(!displayTasks)}
+                    />
+                  ) : (
+                    <IoIosArrowDropdown
+                      color="var(--text)"
+                      onClick={() => setDisplayTasks(!displayTasks)}
+                    />
+                  )}
+                </Styles.ButtonHeader>
+              </Styles.TodoListHeader>
+            </Styles.TableHeader>
+            <Styles.ListAll setOpen={displayTasks}>
+              {search.length > 0
+                ? filteredNames.map((item) => {
+                    return (
+                      <Styles.TodoList key={item.id}>
+                        <Styles.Name>{item.name}</Styles.Name>
+                        <Styles.Description>
+                          {item.description}
+                        </Styles.Description>
+                        <Styles.CreatedAt>
+                          {new Intl.DateTimeFormat("pt-BR").format(
+                            new Date(item.created_at)
+                          )}
+                        </Styles.CreatedAt>
+                        <Styles.Status title={statusIcons[item.status].title}>
+                          {statusIcons[item.status].icon}
+                        </Styles.Status>
+                        <Styles.Priority
+                          title={priorityFlags[item.priority].title}
+                        >
+                          {priorityFlags[item.priority].icon}
+                        </Styles.Priority>
+                        <Styles.ButtonsWrapper>
+                          <FaEdit
+                            onClick={() => {
+                              handleEditTask(item);
+                            }}
+                          />
+                          <FaRegTrashAlt
+                            onClick={() => {
+                              setDisplayDeleteModal(!displayDeleteModal);
+                              setTaskId(item.id);
+                            }}
+                          />
+                        </Styles.ButtonsWrapper>
+                      </Styles.TodoList>
+                    );
+                  })
+                : tasks.map((item) => {
+                    return (
+                      <Styles.TodoList key={item.id}>
+                        <Styles.Name>{item.name}</Styles.Name>
+                        <Styles.Description>
+                          {item.description}
+                        </Styles.Description>
+                        <Styles.CreatedAt>
+                          {new Intl.DateTimeFormat("pt-BR").format(
+                            new Date(item.created_at)
+                          )}
+                        </Styles.CreatedAt>
+                        <Styles.Status title={statusIcons[item.status].title}>
+                          {statusIcons[item.status].icon}
+                        </Styles.Status>
+                        <Styles.Priority
+                          title={priorityFlags[item.priority].title}
+                        >
+                          {priorityFlags[item.priority].icon}
+                        </Styles.Priority>
+                        <Styles.ButtonsWrapper>
+                          <FaEdit
+                            onClick={() => {
+                              handleEditTask(item);
+                            }}
+                          />
+                          <FaRegTrashAlt
+                            onClick={() => {
+                              setDisplayDeleteModal(!displayDeleteModal);
+                              setTaskId(item.id);
+                            }}
+                          />
+                        </Styles.ButtonsWrapper>
+                      </Styles.TodoList>
+                    );
+                  })}
+            </Styles.ListAll>
+          </Styles.TodolistContainer>
+          <Modal
+            headerTitle="Edit task"
+            isOpen={displayEditTaskModal}
+            toggle={setDisplayEditTaskModal}
+          >
+            <EditTaskModal task={editTask} />
+          </Modal>
+          <Modal
+            headerTitle="Delete Task"
+            isOpen={displayDeleteModal}
+            toggle={setDisplayDeleteModal}
+            heightSize="10rem"
+          >
+            <Styles.DeleteModalWrapper>
+              <Styles.DeleteModalTitle>
+                Are you sure that you want to delete this task?
+              </Styles.DeleteModalTitle>
+              <Styles.DeleteModalButtonWrapper>
+                <Button
+                  bgColor="var(--red)"
+                  title="No"
+                  color="white"
+                  onClick={() => setDisplayDeleteModal(!displayDeleteModal)}
                 />
-              ) : (
-                <IoIosArrowDropdown
-                  color="var(--text)"
-                  onClick={() => setDisplayTasks(!displayTasks)}
+                <Button
+                  bgColor="var(--green)"
+                  title="Yes"
+                  color="white"
+                  onClick={() => {
+                    deleteTask(taskId);
+                    setDisplayDeleteModal(!displayDeleteModal);
+                  }}
                 />
-              )}
-            </Styles.ButtonHeader>
-          </Styles.TodoListHeader>
-        </Styles.TableHeader>
-        <Styles.ListAll setOpen={displayTasks}>
-          {search.length > 0
-            ? filteredNames.map((item) => {
-                return (
-                  <Styles.TodoList key={item.id}>
-                    <Styles.Name>{item.name}</Styles.Name>
-                    <Styles.Description>{item.description}</Styles.Description>
-                    <Styles.CreatedAt>
-                      {new Intl.DateTimeFormat("pt-BR").format(
-                        new Date(item.created_at)
-                      )}
-                    </Styles.CreatedAt>
-                    <Styles.Status title={statusIcons[item.status].title}>
-                      {statusIcons[item.status].icon}
-                    </Styles.Status>
-                    <Styles.Priority title={priorityFlags[item.priority].title}>
-                      {priorityFlags[item.priority].icon}
-                    </Styles.Priority>
-                    <Styles.ButtonsWrapper>
-                      <FaEdit
-                        onClick={() => {
-                          handleEditTask(item);
-                        }}
-                      />
-                      <FaRegTrashAlt
-                        onClick={() => {
-                          setDisplayDeleteModal(!displayDeleteModal);
-                          setTaskId(item.id);
-                        }}
-                      />
-                    </Styles.ButtonsWrapper>
-                  </Styles.TodoList>
-                );
-              })
-            : tasks.map((item) => {
-                return (
-                  <Styles.TodoList key={item.id}>
-                    <Styles.Name>{item.name}</Styles.Name>
-                    <Styles.Description>{item.description}</Styles.Description>
-                    <Styles.CreatedAt>
-                      {new Intl.DateTimeFormat("pt-BR").format(
-                        new Date(item.created_at)
-                      )}
-                    </Styles.CreatedAt>
-                    <Styles.Status title={statusIcons[item.status].title}>
-                      {statusIcons[item.status].icon}
-                    </Styles.Status>
-                    <Styles.Priority title={priorityFlags[item.priority].title}>
-                      {priorityFlags[item.priority].icon}
-                    </Styles.Priority>
-                    <Styles.ButtonsWrapper>
-                      <FaEdit
-                        onClick={() => {
-                          handleEditTask(item);
-                        }}
-                      />
-                      <FaRegTrashAlt
-                        onClick={() => {
-                          setDisplayDeleteModal(!displayDeleteModal);
-                          setTaskId(item.id);
-                        }}
-                      />
-                    </Styles.ButtonsWrapper>
-                  </Styles.TodoList>
-                );
-              })}
-        </Styles.ListAll>
-      </Styles.TodolistContainer>
-      <Modal
-        headerTitle="Edit task"
-        isOpen={displayEditTaskModal}
-        toggle={setDisplayEditTaskModal}
-      >
-        <EditTaskModal task={editTask} />
-      </Modal>
-      <Modal
-        headerTitle="Delete Task"
-        isOpen={displayDeleteModal}
-        toggle={setDisplayDeleteModal}
-        heightSize="10rem"
-      >
-        <Styles.DeleteModalWrapper>
-          <Styles.DeleteModalTitle>
-            Are you sure that you want to delete this task?
-          </Styles.DeleteModalTitle>
-          <Styles.DeleteModalButtonWrapper>
-            <Button
-              bgColor="var(--red)"
-              title="No"
-              color="white"
-              onClick={() => setDisplayDeleteModal(!displayDeleteModal)}
-            />
-            <Button
-              bgColor="var(--green)"
-              title="Yes"
-              color="white"
-              onClick={() => {
-                deleteTask(taskId);
-                setDisplayDeleteModal(!displayDeleteModal);
-              }}
-            />
-          </Styles.DeleteModalButtonWrapper>
-        </Styles.DeleteModalWrapper>
-      </Modal>
-    </Styles.TodolistWrapper>
+              </Styles.DeleteModalButtonWrapper>
+            </Styles.DeleteModalWrapper>
+          </Modal>
+        </Styles.TodolistWrapper>
+      ) : (
+        <NoData />
+      )}
+    </>
   );
 };
 

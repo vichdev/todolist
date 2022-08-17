@@ -17,7 +17,7 @@ const Header: React.FC = () => {
       <Styles.Header>
         <Styles.HeaderTitle>To-do list</Styles.HeaderTitle>
         <Styles.NavbarSearchWrapper>
-          <Styles.NavbarButton>
+          <Styles.SearchWrapper>
             <Styles.NavbarSearch
               placeholder="Pesquise pelo nome"
               type={"search"}
@@ -27,21 +27,23 @@ const Header: React.FC = () => {
               }}
             />
             <FaSearch />
-          </Styles.NavbarButton>
-          <Button
-            title="New task"
-            color="white"
-            bgColor="var(--primary-lighter)"
-            onClick={() => setOpenCreateModal(!openCreateModal)}
-          />
-          <Styles.FilterButton
-            color="white"
-            bgColor="var(--primary-lighter)"
-            title=""
-            onClick={() => setOpenFilter(!openFilter)}
-          >
-            <HiFilter />
-          </Styles.FilterButton>
+          </Styles.SearchWrapper>
+          <Styles.ButtonWrapper>
+            <Button
+              title="New task"
+              color="white"
+              bgColor="var(--primary-lighter)"
+              onClick={() => setOpenCreateModal(!openCreateModal)}
+            />
+            <Styles.FilterButton
+              color="white"
+              bgColor="var(--primary-lighter)"
+              title=""
+              onClick={() => setOpenFilter(!openFilter)}
+            >
+              <HiFilter />
+            </Styles.FilterButton>
+          </Styles.ButtonWrapper>
         </Styles.NavbarSearchWrapper>
         <FilterForm isOpen={openFilter} />
       </Styles.Header>
