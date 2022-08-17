@@ -1,7 +1,5 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { useTask } from "../../../../context/TaskContext";
-import { IUpdateTask } from "../../../../models/ITaskContext";
-import { ITasks } from "../../../../models/ITasks";
 import SelectInputs from "../../../Select";
 import { IPropsEditTask } from "./interfaces/IPropsEditTask";
 

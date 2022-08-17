@@ -37,6 +37,7 @@ const Todolist: React.FC = () => {
 
   useEffect(() => {
     getTasks();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   function handleEditTask(item: ITasks): void {

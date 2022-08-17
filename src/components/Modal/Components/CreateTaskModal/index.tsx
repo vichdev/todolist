@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import * as Styles from "./styles";
 import { FaTrashAlt } from "react-icons/fa";
 import { useTask } from "../../../../context/TaskContext";
