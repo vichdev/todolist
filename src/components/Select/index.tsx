@@ -1,6 +1,6 @@
 import React from "react";
 import { FaCheckCircle, FaFlag, FaMinusCircle } from "react-icons/fa";
-import { Priority, Status } from "../../utils/Enums/EnumPriority";
+import { EnumPriority, EnumStatus } from "../../utils/Enums/Enums";
 import { IPropsSelect } from "./interfaces/IPropsSelect";
 import { FormControl, InputLabel, MenuItem, Select } from "@mui/material";
 import { BsFilterCircleFill } from "react-icons/bs";
@@ -25,18 +25,18 @@ const SelectInputs: React.FC<IPropsSelect> = ({
               stateController(e.target.value as number);
             }}
           >
-            <MenuItem value={Priority.Urgent}>
+            <MenuItem value={EnumPriority.Urgent}>
               <FaFlag color="var(--red-flag)" style={{ marginRight: "1rem" }} />
               Urgent
             </MenuItem>
-            <MenuItem value={Priority.High}>
+            <MenuItem value={EnumPriority.High}>
               <FaFlag
                 color="var(--yellow-flag)"
                 style={{ marginRight: "1rem" }}
               />
               High
             </MenuItem>
-            <MenuItem value={Priority.Normal}>
+            <MenuItem value={EnumPriority.Normal}>
               <FaFlag
                 color="var(--blue-flag)"
                 style={{ marginRight: "1rem" }}
@@ -68,7 +68,7 @@ const SelectInputs: React.FC<IPropsSelect> = ({
               stateController(e.target.value as number);
             }}
           >
-            <MenuItem value={Status.inProgress}>
+            <MenuItem value={EnumStatus.inProgress}>
               <FaMinusCircle
                 color="red"
                 title="In progress"
@@ -76,7 +76,7 @@ const SelectInputs: React.FC<IPropsSelect> = ({
               />
               In Progress
             </MenuItem>
-            <MenuItem value={Status.Done}>
+            <MenuItem value={EnumStatus.Done}>
               <FaCheckCircle
                 color="green"
                 title="Done"

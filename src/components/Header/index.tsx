@@ -19,7 +19,7 @@ const Header: React.FC = () => {
         <Styles.NavbarSearchWrapper>
           <Styles.SearchWrapper>
             <Styles.NavbarSearch
-              placeholder="Pesquise pelo nome"
+              placeholder="Search by name"
               type={"search"}
               value={search}
               onChange={(e) => {

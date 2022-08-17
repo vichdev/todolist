@@ -36,7 +36,7 @@ export const SearchWrapper = styled.div`
     position: absolute;
     top: 50%;
     color: var(--text);
-    right: 0;
+    right: 0.4rem;
     transform: translate(-50%, -50%);
   }
 `;

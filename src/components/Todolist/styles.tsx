@@ -67,6 +67,9 @@ export const TodoList = styled.tr`
   td {
     text-align: left;
     width: 100%;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
   &:hover {
     opacity: 0.8;

@@ -3,7 +3,7 @@ import * as Styles from "./styles";
 import { FaTrashAlt } from "react-icons/fa";
 import { useTask } from "../../../../context/TaskContext";
 import Button from "../../../Button";
-import { Status, Priority } from "../../../../utils/Enums/EnumPriority";
+import { EnumStatus, EnumPriority } from "../../../../utils/Enums/Enums";
 import SelectInputs from "../../../Select";
 
 const CreateTaskModal: React.FC = () => {
@@ -16,10 +16,10 @@ const CreateTaskModal: React.FC = () => {
       status: number;
     }>
   >([]);
-  const [status, setStatus] = useState<number>(Status.inProgress);
+  const [status, setStatus] = useState<number>(EnumStatus.inProgress);
   const [name, setName] = useState<string>("");
   const [description, setDescription] = useState<string>("");
-  const [priority, setPriority] = useState<number>(Priority.Normal);
+  const [priority, setPriority] = useState<number>(EnumPriority.Normal);
 
   function addMore(): void {
     setTaskListed([...taskListed, { name, description, status, priority }]);
@@ -37,7 +37,7 @@ const CreateTaskModal: React.FC = () => {
   function cleanInputs(): void {
     setName("");
     setDescription("");
-    setStatus(Status.inProgress);
+    setStatus(EnumStatus.inProgress);
   }
 
   function addTasks(): void {

@@ -8,13 +8,14 @@ export const NoDataWrapper = styled.div`
   justify-content: center;
   gap: 1rem;
   height: 100%;
-  max-height: 25rem;
   padding: 2rem;
 `;
 
 export const NoDataImage = styled.img`
   width: 100%;
   height: 100%;
+  max-width: 25rem;
+  max-height: 25rem;
   object-fit: contain;
 `;
 
