@@ -31,13 +31,17 @@ export const ModalContainer = styled.div<{
   heightSize?: string;
   widthSize?: string;
 }>`
-  width: ${(props) => (props.widthSize ? props.widthSize : "35%")};
+  width: ${(props) => (props.widthSize ? props.widthSize : "35rem")};
   max-width: 40rem;
   position: relative;
-  height: ${(props) => (props.heightSize ? props.heightSize : "80%")};
+  height: ${(props) => (props.heightSize ? props.heightSize : "30rem")};
   max-height: 50rem;
   background-color: white;
   border-radius: 0.75rem;
+
+  @media (min-width: 360px) and (max-width: 576px) {
+    width: 80%;
+  }
 `;
 
 export const Modal = styled.div`

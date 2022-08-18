@@ -8,11 +8,14 @@ export const SummaryWrapper = styled.div`
   justify-content: space-between;
   align-items: center;
   margin-top: -7rem;
+  gap: 2rem;
+  @media (min-width: 360px) and (max-width: 576px) {
+    flex-direction: column;
+  }
 `;
 
 export const SummaryContainer = styled.div<{ bgColor: string }>`
   width: 100%;
-  max-width: 30%;
   height: 9rem;
   display: flex;
   flex-direction: column;
@@ -35,7 +38,11 @@ export const SummaryHeader = styled.div<{ iconColor: string }>`
   }
 `;
 
-export const SummaryHeaderTitle = styled.h1``;
+export const SummaryHeaderTitle = styled.h1`
+  @media (min-width: 576px) and (max-width: 768px) {
+    font-size: 1.5rem;
+  }
+`;
 
 export const SummaryIcon = styled.svg``;
 

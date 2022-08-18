@@ -1,15 +1,22 @@
 import React, { useState } from "react";
 import * as Styles from "./styles";
-import { FaSearch } from "react-icons/fa";
 import { HiFilter } from "react-icons/hi";
 import { useTask } from "../../context/TaskContext";
 import Button from "../Button";
 import Modal from "../Modal";
 import CreateTaskModal from "../Modal/Components/CreateTaskModal";
 import FilterForm from "./components/FilterForm";
+import { AiFillPlusCircle } from "react-icons/ai";
+import MobileModal from "./components/MobileModalFilter";
+import SearchTask from "../SearchTask";
 
 const Header: React.FC = () => {
-  const { search, setSearch, setOpenCreateModal, openCreateModal } = useTask();
+  const {
+    setOpenCreateModal,
+    openCreateModal,
+    setDisplayModalMobile,
+    displayModalMobile,
+  } = useTask();
   const [openFilter, setOpenFilter] = useState<boolean>(false);
 
   return (
@@ -17,17 +24,7 @@ const Header: React.FC = () => {
       <Styles.Header>
         <Styles.HeaderTitle>To-do list</Styles.HeaderTitle>
         <Styles.NavbarSearchWrapper>
-          <Styles.SearchWrapper>
-            <Styles.NavbarSearch
-              placeholder="Search by name"
-              type={"search"}
-              value={search}
-              onChange={(e) => {
-                setSearch(e.target.value);
-              }}
-            />
-            <FaSearch />
-          </Styles.SearchWrapper>
+          <SearchTask />
           <Styles.ButtonWrapper>
             <Button
               title="New task"
@@ -45,6 +42,19 @@ const Header: React.FC = () => {
             </Styles.FilterButton>
           </Styles.ButtonWrapper>
         </Styles.NavbarSearchWrapper>
+        <Styles.MobileModalWrapper>
+          <Styles.FilterButton
+            color="white"
+            bgColor="var(--primary-lighter)"
+            title=""
+            onClick={() => setDisplayModalMobile(!displayModalMobile)}
+          >
+            <HiFilter />
+          </Styles.FilterButton>
+          <AiFillPlusCircle
+            onClick={() => setOpenCreateModal(!openCreateModal)}
+          />
+        </Styles.MobileModalWrapper>
         <FilterForm isOpen={openFilter} />
       </Styles.Header>
       <Modal
@@ -53,6 +63,14 @@ const Header: React.FC = () => {
         toggle={setOpenCreateModal}
       >
         <CreateTaskModal />
+      </Modal>
+      <Modal
+        headerTitle="Filter Task"
+        isOpen={displayModalMobile}
+        toggle={setDisplayModalMobile}
+        heightSize="23rem"
+      >
+        <MobileModal />
       </Modal>
     </Styles.HeaderWrapper>
   );

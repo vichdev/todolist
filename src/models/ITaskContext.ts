@@ -21,6 +21,8 @@ export interface ITaskContext {
   updateTask: (id: string, item: IUpdateTask) => void;
   displayEditTaskModal: boolean;
   setDisplayEditTaskModal: Dispatch<SetStateAction<boolean>>;
+  displayModalMobile: boolean;
+  setDisplayModalMobile: Dispatch<SetStateAction<boolean>>;
 }
 
 interface IToast {

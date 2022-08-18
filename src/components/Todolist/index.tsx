@@ -103,8 +103,8 @@ const Todolist: React.FC = () => {
                 ? filteredNames.map((item) => {
                     return (
                       <Styles.TodoList key={item.id}>
-                        <Styles.Name>{item.name}</Styles.Name>
-                        <Styles.Description>
+                        <Styles.Name title={item.name}>{item.name}</Styles.Name>
+                        <Styles.Description title={item.description}>
                           {item.description}
                         </Styles.Description>
                         <Styles.CreatedAt>
@@ -139,8 +139,8 @@ const Todolist: React.FC = () => {
                 : tasks.map((item) => {
                     return (
                       <Styles.TodoList key={item.id}>
-                        <Styles.Name>{item.name}</Styles.Name>
-                        <Styles.Description>
+                        <Styles.Name title={item.name}>{item.name}</Styles.Name>
+                        <Styles.Description title={item.description}>
                           {item.description}
                         </Styles.Description>
                         <Styles.CreatedAt>

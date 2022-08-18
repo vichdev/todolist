@@ -105,6 +105,9 @@ export const HeaderDate = styled.th`
   max-width: 10rem;
   display: flex;
   justify-content: flex-start;
+  @media (min-width: 360px) and (max-width: 576px) {
+    display: none;
+  }
 `;
 
 export const ButtonHeader = styled.th`
@@ -121,6 +124,9 @@ export const CreatedAt = styled.td`
   max-width: 10rem;
   display: flex;
   justify-content: flex-start;
+  @media (min-width: 360px) and (max-width: 576px) {
+    display: none;
+  }
 `;
 
 export const Status = styled.td`

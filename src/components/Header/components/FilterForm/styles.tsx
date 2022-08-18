@@ -10,7 +10,7 @@ export const FilterWrapper = styled.div<{ isOpen: boolean }>`
   border-radius: 0.5rem;
   box-shadow: 5px 5px 35px 19px rgba(0, 0, 0, 0.1);
   top: 5.5rem;
-  right: 8.5rem;
+  right: 5rem;
   padding: 1rem;
   flex-direction: column;
   z-index: 999rem;

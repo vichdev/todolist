@@ -15,6 +15,7 @@ const Context: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const [openCreateModal, setOpenCreateModal] = useState<boolean>(false);
   const [displayEditTaskModal, setDisplayEditTaskModal] =
     useState<boolean>(false);
+  const [displayModalMobile, setDisplayModalMobile] = useState<boolean>(false);
 
   async function createTask(task: ICreateTask): Promise<void> {
     await api
@@ -161,6 +162,8 @@ const Context: React.FC<{ children: React.ReactNode }> = ({ children }) => {
         updateTask,
         displayEditTaskModal,
         setDisplayEditTaskModal,
+        displayModalMobile,
+        setDisplayModalMobile,
       }}
     >
       {children}
