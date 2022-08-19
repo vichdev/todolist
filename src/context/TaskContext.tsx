@@ -164,6 +164,7 @@ const Context: React.FC<{ children: React.ReactNode }> = ({ children }) => {
         setDisplayEditTaskModal,
         displayModalMobile,
         setDisplayModalMobile,
+        displayToast,
       }}
     >
       {children}

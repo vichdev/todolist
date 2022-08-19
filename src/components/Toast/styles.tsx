@@ -33,6 +33,13 @@ export const ToastHeader = styled.div<{ isSucess?: boolean }>`
     font-size: 1.5rem;
   }
 `;
+
+export const ToastHeaderWrapper = styled.div`
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+`;
+
 export const ToastSpan = styled.span`
   margin-top: 0.5rem;
   font-size: 1rem;

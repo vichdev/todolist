@@ -23,6 +23,7 @@ export interface ITaskContext {
   setDisplayEditTaskModal: Dispatch<SetStateAction<boolean>>;
   displayModalMobile: boolean;
   setDisplayModalMobile: Dispatch<SetStateAction<boolean>>;
+  displayToast: ({ title, description, status }: IToast) => void;
 }
 
 interface IToast {

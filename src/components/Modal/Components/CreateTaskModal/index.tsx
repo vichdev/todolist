@@ -5,24 +5,62 @@ import { useTask } from "../../../../context/TaskContext";
 import Button from "../../../Button";
 import { EnumStatus, EnumPriority } from "../../../../utils/Enums/Enums";
 import SelectInputs from "../../../Select";
+import { ITasks } from "../../../../models/ITasks";
+
+interface ITaskListed {
+  name: string;
+  description: string;
+  status: number;
+  priority: number;
+  id?: string;
+  created_at?: Date;
+}
 
 const CreateTaskModal: React.FC = () => {
-  const { createTask, setOpenCreateModal, openCreateModal } = useTask();
-  const [taskListed, setTaskListed] = useState<
-    Array<{
-      name: string;
-      description: string;
-      priority: number;
-      status: number;
-    }>
-  >([]);
+  const {
+    createTask,
+    setOpenCreateModal,
+    openCreateModal,
+    displayToast,
+    tasks,
+  } = useTask();
+  const [taskListed, setTaskListed] = useState<Array<ITaskListed>>([]);
   const [status, setStatus] = useState<number>(EnumStatus.inProgress);
   const [name, setName] = useState<string>("");
   const [description, setDescription] = useState<string>("");
   const [priority, setPriority] = useState<number>(EnumPriority.Normal);
 
-  function addMore(): void {
+  function checkIfTaskAlreadyExists(
+    tasks: ITaskListed[],
+    name: string
+  ): ITaskListed | undefined {
+    return tasks.find((task) => task.name === name);
+  }
+
+  function addMoreTasks(): void {
+    const taskListedAlreadyExists = checkIfTaskAlreadyExists(taskListed, name);
+    const allTasksAlreadyExists = checkIfTaskAlreadyExists(tasks, name);
+
+    if (taskListedAlreadyExists || allTasksAlreadyExists) {
+      displayToast({
+        title: "Request failed",
+        description: "Task already exists.",
+        status: false,
+      });
+      return;
+    }
+
+    if (!name) {
+      displayToast({
+        title: "Request failed",
+        description: "Name can't be empty.",
+        status: false,
+      });
+      return;
+    }
+
     setTaskListed([...taskListed, { name, description, status, priority }]);
+
     cleanInputs();
   }
 
@@ -112,7 +150,7 @@ const CreateTaskModal: React.FC = () => {
           color="white"
           borderColor="black"
           onClick={() => {
-            addMore();
+            addMoreTasks();
           }}
           disabled={taskListed.length >= 3}
         />
