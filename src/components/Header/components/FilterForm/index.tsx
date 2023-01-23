@@ -6,7 +6,7 @@ import { useTask } from "../../../../context/TaskContext";
 import SelectInputs from "../../../Select";
 
 const FilterForm: React.FC<IPropsFilter> = ({ isOpen }) => {
-  const [priority, setPriority] = useState<number>(EnumPriority.Urgent);
+  const [priority, setPriority] = useState<EnumPriority>(EnumPriority.Urgent);
   const [status, setStatus] = useState<number>(EnumStatus.inProgress);
   const { getTasks } = useTask();
 

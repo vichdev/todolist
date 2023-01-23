@@ -1,11 +1,9 @@
 import { Dispatch, SetStateAction } from "react";
+import { EnumPriority, EnumStatus } from "../utils/Enums/Enums";
 import { ITasks } from "./ITasks";
 
 export interface ITaskContext {
-  getTasks: (
-    priority?: number | string,
-    status?: number | string
-  ) => Promise<void>;
+  getTasks: (priority?: EnumPriority, status?: EnumStatus) => Promise<void>;
   tasks: Array<ITasks>;
   deleteTask: (id: string) => void;
   search: string;

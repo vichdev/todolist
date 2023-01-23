@@ -2,6 +2,7 @@ import React, { createContext, useContext, useState } from "react";
 import { ICreateTask, ITaskContext, IUpdateTask } from "../models/ITaskContext";
 import { ITasks } from "../models/ITasks";
 import api from "../services/api";
+import { EnumPriority, EnumStatus } from "../utils/Enums/Enums";
 
 const TaskContext = createContext<ITaskContext>({} as ITaskContext);
 
@@ -38,8 +39,8 @@ const Context: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   }
 
   async function getTasks(
-    priority?: number | string,
-    status?: number | string
+    priority?: EnumPriority,
+    status?: EnumStatus
   ): Promise<void> {
     await api
       .get("tasks", {

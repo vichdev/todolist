@@ -27,7 +27,6 @@ const EditTaskModal: React.FC<IPropsEditTask> = ({ task }) => {
       status: editStatus,
     };
     updateTask(editTask.id, taskEdited);
-    console.log(editName.length);
     setDisplayEditTaskModal(!displayEditTaskModal);
   }
 
